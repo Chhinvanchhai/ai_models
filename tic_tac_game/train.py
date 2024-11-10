@@ -17,7 +17,7 @@ model = create_model()
 
 
 
-def train_dqn(episodes=50, gamma=0.9, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.1, batch_size=32):
+def train_dqn(episodes=1000, gamma=0.9, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.1, batch_size=32):
     memory = deque(maxlen=2000)
     env = tic_tac_toe_env.TicTacToeEnv()
     
@@ -36,9 +36,7 @@ def train_dqn(episodes=50, gamma=0.9, epsilon=1.0, epsilon_decay=0.995, epsilon_
 
             # Take the action
             next_state, reward, done = env.step(action, 1)
-            print(f"------next_state, reward, done:{next_state},{reward}, {done}")
             next_state = np.reshape(next_state, [1, 9])
-            print(f"------nt reshsap, reward, done:{next_state}")
             # Store experience in replay memory
             memory.append((state, action, reward, next_state, done))
             state = next_state
